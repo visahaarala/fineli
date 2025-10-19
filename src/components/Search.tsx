@@ -16,8 +16,8 @@ const Search = ({
   setFoods: Dispatch<SetStateAction<FoodType[]>>;
 }) => {
   const [igclasspOpt, setIgclasspOpt] = useState<string | undefined>();
-  const [isRaw, setIsRaw] = useState(false);
-  const [isScientific, setIsScientific] = useState(false);
+  const [isRaw, setIsRaw] = useState(true);
+  const [isScientific, setIsScientific] = useState(true);
 
   useEffect(() => {
     const words = search.split(' ');
