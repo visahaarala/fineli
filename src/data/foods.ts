@@ -1,4 +1,6 @@
-export const header = [
+import type { FoodType } from '../@types/types';
+
+export const header: (keyof FoodType)[] = [
   'id',
   'scientific',
   'name',

@@ -1,19 +1,27 @@
-export type Food = { [key: string]: string };
+// export type Food = { [key: string]: string };
 
-// export type Food = {
-//   id: number;
-//   scientific: string | null;
-//   name: string;
-//   process: string;
-//   igclass: string;
-//   igclassp: string;
-//   energy: number;
-//   fat: number;
-//   protein: number;
-//   sugar: number;
-//   starch: number;
-//   fiber: number;
-// };
+export type FoodType = {
+  id: number;
+  scientific: string | null;
+  name: string;
+  process: string;
+  igclass: string;
+  igclassp: string;
+  energy: number;
+  fat: number;
+  protein: number;
+  sugar: number;
+  starch: number;
+  fiber: number;
+};
+
+export type Percentage = {
+  amount: number;
+  rdi?: {
+    min?: number;
+    max?: number;
+  };
+};
 
 // export type IgclasspType =
 //   | 'SUGARTOT'
