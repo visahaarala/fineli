@@ -42,10 +42,9 @@ const Search = ({
           if (word[0] === '-') {
             word = word.slice(1);
             if (
-              word.length > 1 &&
+              word.length > 0 &&
               food['name'].toLowerCase().includes(word.toLowerCase())
             ) {
-              console.log(word, 'ok');
               return false;
             }
           } else {

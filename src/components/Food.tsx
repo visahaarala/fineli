@@ -1,4 +1,4 @@
-import type { FoodType, Percentage } from '../@types/types';
+import type { FoodType, PercentageType } from '../@types/types';
 import Bar from './Bar';
 import styles from './Food.module.scss';
 
@@ -10,7 +10,7 @@ const Food = ({ food }: { food: FoodType }) => {
   const calcKcal = fat * 9 + (protein + sugar + starch) * 4 + fiber * 2; // source?
 
   const pctgs: {
-    [key: string]: Percentage;
+    [key: string]: PercentageType;
   } = {
     fat: { amount: ((fat * 9) / calcKcal) * 100, rdi: { min: 10, max: 35 } },
     protein: {
@@ -43,7 +43,7 @@ const Food = ({ food }: { food: FoodType }) => {
         <h3>Energiajakauma ({kcal.toFixed(0)} kcal / 100g):</h3>
         <div className={styles.graph}>
           {Object.keys(pctgs).map((nutrient) => (
-            <Bar pctg={pctgs[nutrient]} nutrient={nutrient} />
+            <Bar pctg={pctgs[nutrient]} nutrient={nutrient} key={nutrient} />
           ))}
         </div>
       </div>

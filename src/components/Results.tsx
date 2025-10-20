@@ -25,8 +25,8 @@ const Results = ({
         {foods.slice(0, MAX_RESULTS).map((food) => (
           <div
             key={Math.random()}
-            // onClick={() => setSearch(String(food.id))}
             onClick={() => setSearch(String(food.id))}
+            className={styles.name}
           >
             {food.name}
             {food.scientific ? (

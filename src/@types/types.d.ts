@@ -15,7 +15,7 @@ export type FoodType = {
   fiber: number;
 };
 
-export type Percentage = {
+export type PercentageType = {
   amount: number;
   rdi?: {
     min?: number;

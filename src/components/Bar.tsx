@@ -1,13 +1,20 @@
-import type { Percentage } from '../@types/types';
+import type { PercentageType } from '../@types/types';
 import styles from './Bar.module.scss';
 
-const Bar = ({ pctg, nutrient }: { pctg: Percentage; nutrient: string }) => {
-  console.log('bar', nutrient);
+const Bar = ({ pctg, nutrient }: { pctg: PercentageType; nutrient: string }) => {
+  
+  const fi: { [key: string]: string } = {
+    fat: 'rasva',
+    protein: 'proteiini',
+    sugar: 'sokeri',
+    starch: 'tärkkelys',
+    fiber: 'kuitu',
+  };
 
   return (
     <div key={nutrient} className={styles.nutrientBar}>
       <p className={styles.name}>
-        {nutrient} {pctg.amount.toFixed(0)}%
+        {fi[nutrient]} {pctg.amount.toFixed(0)}%
       </p>
       <div className={styles.bar}>
         <div
