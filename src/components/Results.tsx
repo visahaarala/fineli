@@ -29,7 +29,11 @@ const Results = ({
             onClick={() => setSearch(String(food.id))}
           >
             {food.name}
-            {food.scientific ? <span>({food.scientific})</span> : ''}
+            {food.scientific ? (
+              <span className='scientific'>({food.scientific})</span>
+            ) : (
+              ''
+            )}
           </div>
         ))}
         {foods.length > MAX_RESULTS ? (

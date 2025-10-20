@@ -1,91 +1,106 @@
-.bar {
-  width: 100%;
-  height: 100%;
-  background-color: lightgray;
-  position: relative;
-
+.nutrientBar {
   display: flex;
-  align-items: flex-end;
+  flex-direction: column;
 
-  .fat,
-  .protein,
-  .sugar,
-  .starch,
-  .fiber {
+  .name {
+    text-transform: capitalize;
+    font-size: 0.9rem;
+    margin-bottom: 0.1rem;
+  }
+
+  .bar {
     width: 100%;
-  }
+    height: 1.8rem;
+    border: 0.05rem solid #eee8;
+    position: relative;
 
-  .fat {
-    background-color: brown;
-  }
-  .protein {
-    background-color: purple;
-  }
-  .starch {
-    background-color: yellow;
-  }
-  .sugar {
-    background-color: red;
-  }
-  .fiber {
-    background-color: green;
-  }
-
-  .rdi {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 40%;
-    height: 100%;
     display: flex;
-    flex-direction: column-reverse;
+    align-items: flex-end;
 
-    .range {
-      position: relative;
+    .fat,
+    .protein,
+    .sugar,
+    .starch,
+    .fiber {
+      height: 100%;
+    }
+
+    .fat {
+      background-color: brown;
+    }
+    .protein {
+      background-color: purple;
+    }
+    .starch {
+      background-color: yellow;
+    }
+    .sugar {
+      background-color: red;
+    }
+    .fiber {
+      background-color: green;
+    }
+
+    .rdi {
+      position: absolute;
+      height: 100%;
       width: 100%;
+      background-color: #2228;
 
-      $rangeColor: #222;
-      $thickness: 0.15rem;
+      display: flex;
 
-      div {
-        height: 100%;
-        width: $thickness;
-        margin-left: 50%;
-        background-color: $rangeColor;
-        transform: translateX(-50%);
-      }
-      &::before,
-      &::after {
-        position: absolute;
-        content: '';
-        width: 100%;
-        height: $thickness;
-        background-color: $rangeColor;
-      }
-      &::before {
-        bottom: 0;
-      }
-      &::after {
-        top: 0;
-      }
+      .range {
+        position: relative;
+        height: 60%;
+        top: 50%;
+        transform: translateY(-50%);
+        $rangeColor: #eee;
+        $thickness: 0.05rem;
 
-      &--noTop {
-        &::after {
-          height: 0;
-        }
         div {
-          background-color: unset;
-          background-image: linear-gradient(
-            to top,
-            $rangeColor,
-            transparent
-          );
+          position: absolute;
+          top: 50%;
+          transform: translateY(-50%);
+          width: 100%;
+          background-color: $rangeColor;
+          height: $thickness;
         }
-      }
 
-      &--noBottom {
+        &::before,
+        &::after {
+          position: absolute;
+          content: '';
+          height: 100%;
+          width: $thickness;
+          background-color: $rangeColor;
+        }
+
         &::before {
-          height: 0;
+          left: 0;
+        }
+
+        &::after {
+          right: 0;
+        }
+
+        &--noMin {
+          &::before {
+            height: 0;
+          }
+        }
+
+        &--noMax {
+          &::after {
+            width: 0;
+          }
+          div {
+            background-color: unset;
+            background-image: linear-gradient(
+              to right,
+              $rangeColor,
+              transparent
+            );
+          }
         }
       }
     }

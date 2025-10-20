@@ -19,11 +19,11 @@ const Food = ({ food }: { food: FoodType }) => {
     },
     sugar: {
       amount: ((sugar * 4) / calcKcal) * 100,
-      rdi: { max: 10 },
+      // rdi: { max: 10 },
     },
     starch: {
       amount: ((starch * 4) / calcKcal) * 100,
-      rdi: { min: 45, max: 65 },
+      // rdi: { min: 45, max: 65 },
     },
     fiber: {
       amount: ((fiber * 2) / calcKcal) * 100,
@@ -33,19 +33,19 @@ const Food = ({ food }: { food: FoodType }) => {
 
   return (
     <div className={styles.food}>
-      <strong>
-        {food.name} (#{food.id})
-      </strong>
-      <p>energy: {kcal.toFixed(0)} kcal</p>
-      {Object.keys(pctgs).map((nutrient) => (
-        <p key={nutrient}>{`${nutrient}: ${pctgs[nutrient].amount.toFixed(
-          0
-        )}%`}</p>
-      ))}
-      <div className={styles.graph}>
-        {Object.keys(pctgs).map((nutrient) => (
-          <Bar pctg={pctgs[nutrient]} nutrient={nutrient} />
-        ))}
+      <div>
+        <h2>
+          #{food.id}: {food.name}
+        </h2>
+        <p className='scientific'>{food.scientific}</p>
+      </div>
+      <div>
+        <h3>Energiajakauma ({kcal.toFixed(0)} kcal / 100g):</h3>
+        <div className={styles.graph}>
+          {Object.keys(pctgs).map((nutrient) => (
+            <Bar pctg={pctgs[nutrient]} nutrient={nutrient} />
+          ))}
+        </div>
       </div>
     </div>
   );

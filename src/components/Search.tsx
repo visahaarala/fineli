@@ -17,7 +17,7 @@ const Search = ({
 }) => {
   const [igclasspOpt, setIgclasspOpt] = useState<string | undefined>();
   const [isRaw, setIsRaw] = useState(true);
-  const [isScientific, setIsScientific] = useState(true);
+  const [isScientific, setIsScientific] = useState(false);
 
   useEffect(() => {
     const words = search.split(' ');
@@ -32,19 +32,6 @@ const Search = ({
       }
       return;
     }
-
-    // for (const word of words) {
-    //   console.log('searching for number in ', word);
-    //   const searchId = Number(word);
-    //   if (searchId) {
-    //     const food = foods.find((food) => food.id === searchId);
-    //     if (food !== undefined) {
-    //       console.log('found food: ', food.name);
-    //       setFoods([food]);
-    //       return;
-    //     }
-    //   }
-    // }
 
     const filteredFoods = foods
       .filter((food) => !isScientific || food['scientific'])
@@ -72,30 +59,28 @@ const Search = ({
     setFoods(filteredFoods);
   }, [search, igclasspOpt, isRaw, isScientific, setFoods]);
 
+  useEffect(() => {
+    document.getElementById('search')?.focus();
+  }, []);
+
   return (
     <div className={styles.search}>
-      <div>
-        <label htmlFor='raw'>käsittelemätön</label>
+      <div className={styles.checkBox}>
+        <label htmlFor='raw'>Käsittelemätön</label>
         <input
           type='checkbox'
           checked={isRaw}
           onChange={() => setIsRaw(!isRaw)}
         />
       </div>
-      <div>
-        <label htmlFor='scientific'>scientific</label>
+      <div className={styles.checkBox}>
+        <label htmlFor='scientific'>Tieteellinen nimi</label>
         <input
           type='checkbox'
           checked={isScientific}
           onChange={() => setIsScientific(!isScientific)}
         />
       </div>
-      <input
-        type='text'
-        value={search}
-        onChange={(e) => setSearch(e.target.value)}
-        placeholder='hae..'
-      />
       <select
         name='igclassp'
         id='igclassp'
@@ -108,6 +93,24 @@ const Search = ({
           </option>
         ))}
       </select>
+      <div className={styles.input}>
+        <input
+          id='search'
+          type='text'
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          placeholder='hae..'
+        />
+        <div
+          className={`${styles.clear} ${
+            search.length > 0 ? styles['clear--visible'] : ''
+          }`}
+          onClick={() => {
+            setSearch('');
+            document.getElementById('search')?.focus();
+          }}
+        />
+      </div>
     </div>
   );
 };
