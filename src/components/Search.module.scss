@@ -1,7 +1,7 @@
 .search {
   display: flex;
   flex-direction: column;
-  gap: 0.8rem;
+  gap: 0.6rem;
 
   .checkBox {
     display: flex;
@@ -16,6 +16,7 @@
   }
 
   .input {
+    margin-top: 0.5rem;
     display: flex;
     justify-content: space-between;
     align-items: center;

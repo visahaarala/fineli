@@ -16,14 +16,17 @@ const Search = ({
   setFoods: Dispatch<SetStateAction<FoodType[]>>;
 }) => {
   const [igclasspOpt, setIgclasspOpt] = useState<string | undefined>();
-  const [isRaw, setIsRaw] = useState(true);
+  const [isRaw, setIsRaw] = useState(false);
   const [isScientific, setIsScientific] = useState(false);
 
   useEffect(() => {
-    const words = search.split(' ');
+    const words = search
+      .trim()
+      .split(' ')
+      .map((w) => w.toLowerCase().replace(/[()#]/g, ''));
 
     // check for food ID in search field
-    if (words.length === 1 && Number(words[0])) {
+    if (words.length === 1 && Number(words[0].replace('#', ''))) {
       const food = foods.find((food) => food.id === Number(words[0]));
       if (food) {
         setFoods([food]);
@@ -34,21 +37,29 @@ const Search = ({
     }
 
     const filteredFoods = foods
-      .filter((food) => !isScientific || food['scientific'])
-      .filter((food) => !isRaw || food['process'] === 'RAW')
-      .filter((food) => !igclasspOpt || food['igclassp'] === igclasspOpt)
+      .filter((food) => !isScientific || food.scientific)
+      .filter((food) => !isRaw || food.process === 'RAW')
+      .filter((food) => !igclasspOpt || food.igclassp === igclasspOpt)
       .filter((food) => {
         for (let word of words) {
           if (word[0] === '-') {
             word = word.slice(1);
             if (
               word.length > 0 &&
-              food['name'].toLowerCase().includes(word.toLowerCase())
+              (food.name.toLowerCase().includes(word) ||
+                food.scientific?.toLowerCase().includes(word) ||
+                String(food.id).includes(word))
             ) {
               return false;
             }
           } else {
-            if (!food['name'].toLowerCase().includes(word.toLowerCase())) {
+            if (
+              !(
+                food.name.toLowerCase().includes(word) ||
+                food.scientific?.toLowerCase().includes(word) ||
+                String(food.id).includes(word)
+              )
+            ) {
               return false;
             }
           }

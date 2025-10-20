@@ -12,37 +12,29 @@ const Results = ({
   setSearch: Dispatch<SetStateAction<string>>;
 }) => (
   <div className={styles.results}>
-    {foods.length === 1 ? (
-      <div className={styles.graph}>
-        <h3>{foods[0].name}</h3>
-      </div>
-    ) : (
-      <div className={styles.list}>
-        <p>
-          {foods.length > MAX_RESULTS ? `${MAX_RESULTS} / ` : ''} {foods.length}{' '}
-          tulosta
-        </p>
-        {foods.slice(0, MAX_RESULTS).map((food) => (
-          <div
-            key={Math.random()}
-            onClick={() => setSearch(String(food.id))}
-            className={styles.name}
-          >
-            {food.name}
-            {food.scientific ? (
-              <span className='scientific'>({food.scientific})</span>
-            ) : (
-              ''
-            )}
-          </div>
-        ))}
-        {foods.length > MAX_RESULTS ? (
-          <div>... {foods.length - MAX_RESULTS} lisää</div>
+    <p className={styles.numResults}>{foods.length} tulosta</p>
+    {foods.slice(0, MAX_RESULTS).map((food) => (
+      <p
+        key={Math.random()}
+        onClick={() => setSearch(String(food.id))}
+        className={styles.name}
+      >
+        {food.name}
+        {food.scientific ? (
+          <span className='scientific'>({food.scientific})</span>
         ) : (
           ''
         )}
-      </div>
+      </p>
+    ))}
+    {foods.length > MAX_RESULTS ? (
+      <p className={styles.numResults}>... {foods.length - MAX_RESULTS} lisää</p>
+    ) : (
+      ''
     )}
+    {/* 
+      ADD AVERAGE VIEW (when less than 100?)
+    */}
   </div>
 );
 

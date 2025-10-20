@@ -35,7 +35,7 @@ const Food = ({ food }: { food: FoodType }) => {
     <div className={styles.food}>
       <div>
         <h2>
-          #{food.id}: {food.name}
+          #{food.id} - {food.name}
         </h2>
         <p className='scientific'>{food.scientific}</p>
       </div>
