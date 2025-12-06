@@ -1,35 +1,10 @@
-import type { FoodType, PercentageType } from '../@types/types';
+import type { FoodType } from '../@types/types';
+import getFoodInfo from '../utilities/getFoodInfo';
 import Bar from './Bar';
 import styles from './Food.module.scss';
 
 const Food = ({ food }: { food: FoodType }) => {
-  const { energy, fat, protein, sugar, starch, fiber } = food;
-
-  const kcal = energy / 4.184; // wikipedia
-
-  const calcKcal = fat * 9 + (protein + sugar + starch) * 4 + fiber * 2; // source?
-
-  const pctgs: {
-    [key: string]: PercentageType;
-  } = {
-    fat: { amount: ((fat * 9) / calcKcal) * 100, rdi: { min: 10, max: 35 } },
-    protein: {
-      amount: ((protein * 4) / calcKcal) * 100,
-      rdi: { min: 10, max: 35 },
-    },
-    sugar: {
-      amount: ((sugar * 4) / calcKcal) * 100,
-      // rdi: { max: 10 },
-    },
-    starch: {
-      amount: ((starch * 4) / calcKcal) * 100,
-      // rdi: { min: 45, max: 65 },
-    },
-    fiber: {
-      amount: ((fiber * 2) / calcKcal) * 100,
-      rdi: { min: 2.8 },
-    },
-  };
+  const { kcal, percentages } = getFoodInfo(food, true);
 
   return (
     <div className={styles.food}>
@@ -42,8 +17,12 @@ const Food = ({ food }: { food: FoodType }) => {
       <div>
         <h3>Energiajakauma ({kcal.toFixed(0)} kcal / 100g):</h3>
         <div className={styles.graph}>
-          {Object.keys(pctgs).map((nutrient) => (
-            <Bar pctg={pctgs[nutrient]} nutrient={nutrient} key={nutrient} />
+          {Object.keys(percentages).map((nutrient) => (
+            <Bar
+              pctg={percentages[nutrient]}
+              nutrient={nutrient}
+              key={nutrient}
+            />
           ))}
         </div>
       </div>

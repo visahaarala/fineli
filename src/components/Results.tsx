@@ -12,7 +12,7 @@ const Results = ({
   setSearch: Dispatch<SetStateAction<string>>;
 }) => (
   <div className={styles.results}>
-    <p className={styles.numResults}>{foods.length} tulosta</p>
+    <p className={styles.numResults}>{foods.length} hakutulosta</p>
     {foods.slice(0, MAX_RESULTS).map((food) => (
       <p
         key={Math.random()}
@@ -32,7 +32,7 @@ const Results = ({
     ) : (
       ''
     )}
-    {/* 
+    {/*
       ADD AVERAGE VIEW (when less than 100?)
     */}
   </div>

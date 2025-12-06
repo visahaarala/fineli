@@ -10,7 +10,6 @@ $bacco: #161616;
 
 html {
   background-color: $bacco;
-  // background-color: black;
 }
 
 body {
@@ -25,7 +24,8 @@ body {
 
 #root,
 header,
-main {
+main,
+footer {
   display: flex;
   flex-direction: column;
 }
@@ -34,7 +34,7 @@ main {
   width: 100%;
   height: 100%;
   max-width: 35rem;
-  padding: 1rem;
+  padding: 1.5rem 1rem 1rem 1rem;
   gap: 1rem;
 }
 
@@ -43,9 +43,28 @@ header {
 }
 
 main {
+  flex: 1;
   padding-top: 1rem;
-  border-top: 1px solid #9993;
+  border-top: 1px solid #9995;
   overflow: scroll;
+
+  &::-webkit-scrollbar {
+    width: 5px;
+    height: 0;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #9999;
+    border-radius: 1rem;
+  }
+
+  &::-webkit-scrollbar-corner {
+    display: none;
+  }
+}
+
+footer {
+  
 }
 
 h1 {

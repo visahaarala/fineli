@@ -1,22 +1,31 @@
 import type { PercentageType } from '../@types/types';
+import fi from '../utilities/fi';
 import styles from './Bar.module.scss';
 
-const Bar = ({ pctg, nutrient }: { pctg: PercentageType; nutrient: string }) => {
-  
-  const fi: { [key: string]: string } = {
-    fat: 'rasva',
-    protein: 'proteiini',
-    sugar: 'sokeri',
-    starch: 'tärkkelys',
-    fiber: 'kuitu',
-  };
-
+const Bar = ({
+  pctg,
+  nutrient,
+  showName = true,
+  heightRem,
+}: {
+  pctg: PercentageType;
+  nutrient: string;
+  showName?: boolean;
+  heightRem?: number;
+}) => {
   return (
     <div key={nutrient} className={styles.nutrientBar}>
-      <p className={styles.name}>
-        {fi[nutrient]} {pctg.amount.toFixed(0)}%
-      </p>
-      <div className={styles.bar}>
+      {showName ? (
+        <p className={styles.name}>
+          {fi(nutrient)} {pctg.amount.toFixed(0)}%
+        </p>
+      ) : (
+        <></>
+      )}
+      <div
+        className={styles.bar}
+        style={heightRem ? { height: heightRem + 'rem' } : {}}
+      >
         <div
           className={styles[nutrient]}
           style={{ width: pctg.amount + '%' }}

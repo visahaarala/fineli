@@ -1,10 +1,10 @@
 import { useEffect, useState, type Dispatch, type SetStateAction } from 'react';
 import styles from './Search.module.scss';
 import type { FoodType } from '../@types/types';
-import getFoods from '../functions/getFoods';
+import getFoods from '../utilities/getFoods';
 import { igclassp } from '../data/categories';
 
-const foods = getFoods();
+const allFoods = getFoods();
 
 const Search = ({
   search,
@@ -27,7 +27,7 @@ const Search = ({
 
     // check for food ID in search field
     if (words.length === 1 && Number(words[0].replace('#', ''))) {
-      const food = foods.find((food) => food.id === Number(words[0]));
+      const food = allFoods.find((food) => food.id === Number(words[0]));
       if (food) {
         setFoods([food]);
       } else {
@@ -36,7 +36,7 @@ const Search = ({
       return;
     }
 
-    const filteredFoods = foods
+    const filteredFoods = allFoods
       .filter((food) => !isScientific || food.scientific)
       .filter((food) => !isRaw || food.process === 'RAW')
       .filter((food) => !igclasspOpt || food.igclassp === igclasspOpt)
