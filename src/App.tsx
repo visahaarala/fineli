@@ -4,7 +4,6 @@ import type { FoodType } from './@types/types';
 import Search from './components/Search';
 import Results from './components/Results';
 import Food from './components/Food';
-import Averages from './components/Averages';
 
 function App() {
   const [foods, setFoods] = useState<FoodType[]>([]);
